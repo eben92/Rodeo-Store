@@ -105,7 +105,7 @@ const CartSlide = () => {
                         src={urlFor(cartItem?.image[0])}
                         alt='product img'
                         className='cart-item-img'
-                        layout='fill'
+                        // layout='fill'
                       />
                     </div>
                     <div className='cart-item-mid'>
