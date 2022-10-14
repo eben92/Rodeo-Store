@@ -1,13 +1,13 @@
-import React from "react";
-import Product from "../../components/product/Product";
-import Trending from "../../components/trending/Trending";
-import { client } from "../../lib/client";
+import React from 'react';
+import Product from '../../components/product/Product';
+import Trending from '../../components/trending/Trending';
+import { client } from '../../lib/client';
 
 const ProductPage = ({ product, products }) => {
   return (
     <>
       <Product product={product.result[0]} />
-      <Trending title="Peaple Also Viewed" trendProducts={products?.result} />
+      <Trending title='People Also Viewed' trendProducts={products?.result} />
     </>
   );
 };
@@ -28,13 +28,13 @@ export const getStaticPaths = async () => {
 
   const paths = await productsSlug.map((product) => ({
     params: {
-      slug: product.slug.current,
-    },
+      slug: product.slug.current
+    }
   }));
 
   return {
     paths,
-    fallback: "blocking",
+    fallback: 'blocking'
   };
 };
 
@@ -46,6 +46,6 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const productsQueryUrl = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%20%3D%3D%20%22product%22%20%26%26%20references('${category_id}')%5D`;
   const products = await fetch(productsQueryUrl).then((res) => res.json());
   return {
-    props: { product, products },
+    props: { product, products }
   };
 };

@@ -1,8 +1,8 @@
-import Link from "next/link";
-import React, { useRef, useState } from "react";
-import { urlFor } from "../../lib/client";
-import Image from "next/image";
-import styles from "./Carousel.module.css";
+import Link from 'next/link';
+import React, { useRef, useState } from 'react';
+import { urlFor } from '../../lib/client';
+import Image from 'next/image';
+import styles from './Carousel.module.css';
 const Carousel = ({ carouselProducts }) => {
   const card = useRef();
   const cardsWrapper = useRef();
@@ -11,21 +11,21 @@ const Carousel = ({ carouselProducts }) => {
 
   const carosel = (direction) => {
     let cardWidth = parseInt(
-      getComputedStyle(card.current).width.replace("px", "")
+      getComputedStyle(card.current).width.replace('px', '')
     );
     let cardsWrapperWidth = parseInt(
-      getComputedStyle(cardsWrapper.current).width.replace("px", "")
+      getComputedStyle(cardsWrapper.current).width.replace('px', '')
     );
     let carouseViewPortWidth = parseInt(
-      getComputedStyle(carouselViewPort.current).width.replace("px", "")
+      getComputedStyle(carouselViewPort.current).width.replace('px', '')
     );
 
     if (
-      direction === "rightArrow" &&
+      direction === 'rightArrow' &&
       -translateX < cardsWrapperWidth - carouseViewPortWidth
     ) {
       setTranslateX(translateX - cardWidth - 19);
-    } else if (direction === "leftArrow" && translateX < 0) {
+    } else if (direction === 'leftArrow' && translateX < 0) {
       setTranslateX(translateX + cardWidth + 19);
     }
 
@@ -44,7 +44,7 @@ const Carousel = ({ carouselProducts }) => {
     <div className={styles.carousel}>
       <div
         onClick={() => {
-          carosel("leftArrow");
+          carosel('leftArrow');
         }}
         className={styles.navLeft}
       >
@@ -52,7 +52,7 @@ const Carousel = ({ carouselProducts }) => {
       </div>
       <div
         onClick={() => {
-          carosel("rightArrow");
+          carosel('rightArrow');
         }}
         className={styles.navRight}
       >
@@ -65,7 +65,7 @@ const Carousel = ({ carouselProducts }) => {
           style={{ transform: `translateX(${translateX}px)` }}
         >
           {carouselProducts?.map((product) => (
-            <Link key={product._id} href={"/product/" + product.slug.current}>
+            <Link key={product._id} href={'/product/' + product.slug.current}>
               <div ref={card} className={styles.carouselCard}>
                 <img
                   src={urlFor(product.image[0])}
@@ -73,7 +73,9 @@ const Carousel = ({ carouselProducts }) => {
                   className={styles.cardImg}
                 />
                 <div className={styles.cardTitle}>{product.name}</div>
-                <div className={styles.cardPrice}>{product.price}</div>
+                <div className={styles.cardPrice}>
+                  ${product.price.toFixed(2)}
+                </div>
               </div>
             </Link>
           ))}
